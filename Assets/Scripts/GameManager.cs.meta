@@ -1,0 +1,30 @@
+fileFormatVersion: 2
+guid: 0a4cfddc75b19d649ad570f205c47c88
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - ballPrefab: {fileID: 8651991220898567088, guid: 2a0229a0d2b38694888b99c42b719f15, type: 3}
+  - ballSpawnPoint: {instanceID: 0}
+  - scoreText: {instanceID: 0}
+  - speedLevelText: {instanceID: 0}
+  - timerText: {instanceID: 0}
+  - introText: {instanceID: 0}
+  - badgeNotification: {instanceID: 0}
+  - smileyIcon: {instanceID: 0}
+  - starIcon: {instanceID: 0}
+  - hitSound: {instanceID: 0}
+  - superHitSound: {instanceID: 0}
+  - softChime: {instanceID: 0}
+  - calmMusic: {instanceID: 0}
+  - voicePraise: {instanceID: 0}
+  - introNarration: {instanceID: 0}
+  - sparkleEffect: {instanceID: 0}
+  - starEffect: {instanceID: 0}
+  - glowRacketEffect: {instanceID: 0}
+  - sceneLight: {instanceID: 0}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
