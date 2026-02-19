@@ -15,7 +15,7 @@ public class EnhancedBallController : MonoBehaviour
     
     private Renderer ballRenderer;
     private Rigidbody rb;
-    private Vector3 direction;
+    public Vector3 direction;
     private bool isGlowing = false;
     private float glowTimer = 0f;
     private bool hasBeenHit = false;
@@ -24,15 +24,23 @@ public class EnhancedBallController : MonoBehaviour
     {
         rb = GetComponent<Rigidbody>();
         ballRenderer = GetComponent<Renderer>();
-        
-        // Set initial direction (toward player)
-        direction = Vector3.back;
-        rb.linearVelocity = direction * speed;
+
+        // Only set a default direction/velocity if none was provided by spawner
+        if (direction == Vector3.zero)
+        {
+            direction = Vector3.back; // sensible default
+        }
+
+        if (rb != null && rb.linearVelocity.sqrMagnitude < 0.0001f)
+        {
+            rb.linearVelocity = direction * speed;
+        }
         
         SetBallColor();
         
         // Don't auto-glow - let GameManager handle inactivity
     }
+   
     
     void Update()
     {
@@ -50,7 +58,6 @@ public class EnhancedBallController : MonoBehaviour
             ballRenderer.material.SetColor("_EmissionColor", Color.yellow * glowIntensity);
         }
     }
-    
     void SetBallColor()
     {
         if (speed <= 5f)

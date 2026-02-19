@@ -10,9 +10,12 @@ public class GameManager : MonoBehaviour
     [Header("Ball Settings")]
     public GameObject ballPrefab;
     public Transform ballSpawnPoint;
-    public float minSpeed = 3f;
-    public float maxSpeed = 15f;
-    public float speedIncrement = 0.5f;
+    public Transform ballSpawnPointLeft;
+    public Transform ballSpawnPointRight;
+    public Transform PlayerPos;
+    public float minSpeed = 5f;
+    public float maxSpeed = 5f;
+    public float speedIncrement = 0.0f;
     private float currentSpeed;
     
     [Header("Game Settings")]
@@ -217,12 +220,25 @@ public class GameManager : MonoBehaviour
     
     void SpawnBall()
     {
-        // Minimal randomness - player is stationary!
-        Vector3 spawnPos = ballSpawnPoint.position + new Vector3(
-            Random.Range(-0.3f, 0.3f),
-            Random.Range(-0.2f, 0.2f),
-            0
-        );
+        int ran = Random.Range(1, 4);
+        Vector3 spawnPos = ballSpawnPoint.position;
+        if(ran == 1)
+        {
+            spawnPos = ballSpawnPoint.position;
+        }
+        else if(ran == 2)
+        {
+            spawnPos = ballSpawnPointLeft.position;
+        }
+        else if(ran == 3)
+        {
+            spawnPos = ballSpawnPointRight.position;
+        }
+
+        Vector3 PlPos = (PlayerPos.position);
+        PlPos += Vector3.right * Random.Range(-1.0f, 1.0f);
+
+        Vector3 direction = (PlPos - spawnPos).normalized; 
         
         GameObject ball = Instantiate(ballPrefab, spawnPos, Quaternion.identity);
         EnhancedBallController bc = ball.GetComponent<EnhancedBallController>();
@@ -230,6 +246,7 @@ public class GameManager : MonoBehaviour
         if (bc != null)
         {
             bc.speed = currentSpeed;
+            bc.direction = direction;
             
             // Enable trajectory guide ONLY if player has missed enough balls
             if (consecutiveMisses >= missesBeforeSimplify)
